@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Tracking | পোদ্দারপাড়া সর্বজনীন দুর্গা মন্দির</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Hind Siliguri', 'sans-serif'],
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.3s ease-out forwards',
+            'slide-up': 'slideUp 0.4s ease-out forwards',
+            'spin-slow': 'spin 3s linear infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+          },
+          colors: {
+            brand: {
+              50: '#fef5ec',
+              100: '#fce9d3',
+              500: '#f97316',
+              600: '#ea580c',
+              900: '#7c2d12',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: #f8fafc; /* Very clean slate-50 */
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white relative">
+
+  <!-- Subtle decorative background pattern for a professional look -->
+  <div class="fixed inset-0 pointer-events-none opacity-[0.03] z-0" style="background-image: radial-gradient(#ea580c 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+  <!-- Premium Header -->
+  <header class="bg-white/80 backdrop-blur-xl border-b border-slate-200/60 sticky top-0 z-40">
+    <div class="max-w-4xl mx-auto px-5 h-16 sm:h-20 flex items-center justify-between">
+      
+      <!-- Brand -->
+      <div class="flex items-center space-x-3 sm:space-x-4">
+        <!-- Elegant Lotus/Temple SVG Icon -->
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 border border-brand-100 shadow-sm">
+          <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"></path>
+          </svg>
+        </div>
+        <div>
+          <span class="font-bold text-slate-900 tracking-tight text-sm sm:text-lg block leading-tight" id="headerBrandTitle">Poddarpara Sarbajanin Durga Mandir</span>
+          <span class="text-xs sm:text-sm text-slate-500 font-medium tracking-wide block mt-0.5" id="headerSubtitle">Order Tracker</span>
+        </div>
+      </div>
+
+      <!-- Language Selector -->
+      <button id="langToggleBtn" class="flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs sm:text-sm font-semibold text-slate-700 hover:bg-slate-100 transition-all focus:outline-none focus:ring-2 focus:ring-brand-500/20 flex-shrink-0 z-10 relative">
+        <svg class="w-4 h-4 text-slate-400 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
+        <span id="langLabel">বাংলা</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-4xl w-full mx-auto px-5 py-8 sm:py-10 space-y-8 flex flex-col justify-start relative z-10">
+
+    <!-- Professional Search Input -->
+    <div class="bg-white p-2.5 sm:p-3 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row gap-3 items-center">
+      <div class="relative w-full flex-1">
+        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </div>
+        <input type="text" id="orderSearchInput" placeholder="Enter 7-character Order ID (e.g. 7K2B9X4)" maxlength="7"
+          class="w-full uppercase font-mono tracking-widest pl-12 pr-4 py-3.5 sm:py-4 rounded-xl bg-transparent text-slate-900 text-base sm:text-lg placeholder:text-slate-400 placeholder:font-sans placeholder:normal-case placeholder:tracking-normal focus:bg-slate-50 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 outline-none transition-all border border-transparent" />
+      </div>
+      <button id="btnTrackOrder" class="w-full sm:w-auto px-8 py-3.5 sm:py-4 bg-brand-600 hover:bg-brand-700 text-white text-sm sm:text-base font-semibold rounded-xl shadow-sm transition-all active:scale-95 flex items-center justify-center space-x-2">
+        <span id="btnTrackText">Track Order</span>
+        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+      </button>
+    </div>
+
+    <!-- Dynamic Content Container -->
+    <div id="statusContainer" class="w-full">
+      
+      <!-- STATE 1: Default Empty State -->
+      <div id="stateEmpty" class="py-16 text-center animate-fade-in">
+        <div class="w-20 h-20 mx-auto bg-slate-100 rounded-2xl flex items-center justify-center mb-6 border border-slate-200">
+          <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-800" id="lblEmptyTitle">Track Your Order</h3>
+        <p class="text-slate-500 mt-2 max-w-md mx-auto text-sm sm:text-base" id="lblEmptyDesc">Enter your 7-character order code above to check the live status of your items.</p>
+      </div>
+
+      <!-- STATE 2: Loading Spinner -->
+      <div id="stateLoading" class="hidden py-16 text-center animate-fade-in">
+        <div class="relative w-12 h-12 mx-auto mb-5">
+          <div class="absolute inset-0 rounded-full border-4 border-slate-100"></div>
+          <div class="absolute inset-0 rounded-full border-4 border-brand-500 border-t-transparent animate-spin"></div>
+        </div>
+        <p class="text-slate-500 font-medium text-sm sm:text-base" id="lblVerifying">Retrieving order details...</p>
+      </div>
+
+      <!-- STATE 3: Invalid Checksum Error -->
+      <div id="stateInvalid" class="hidden bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-sm text-center animate-slide-up">
+        <div class="w-16 h-16 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center mx-auto mb-5">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <h2 class="text-xl font-bold text-slate-900 mb-2" id="lblInvalidTitle">Order Not Found</h2>
+        <p class="text-slate-500 max-w-md mx-auto text-sm sm:text-base" id="lblInvalidDesc">
+          The tracking code provided is not recognized. Please check your SMS and ensure you entered the complete code.
+        </p>
+      </div>
+
+      <!-- STATE 4: Pending Sync (Valid Checksum, Offline Cloud) -->
+      <div id="statePendingSync" class="hidden bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-sm animate-slide-up space-y-6">
+        <div class="flex flex-col items-center text-center">
+          <div class="w-16 h-16 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-5 border border-amber-100">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          
+          <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-600 mb-4" id="badgePendingSync">
+            Order Received
+          </span>
+          
+          <h2 class="text-2xl font-bold text-slate-900 tracking-tight">
+            <span id="lblPendingOrderIdPrefix">Order</span> #<span id="txtPendingOrderId" class="font-mono text-brand-600"></span>
+          </h2>
+          <p class="text-slate-500 text-sm sm:text-base mt-3 max-w-md" id="lblPendingSyncMessage">
+            Your order was successfully recorded. Detailed item breakdown is currently syncing.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-5 flex items-start space-x-4 max-w-xl mx-auto">
+          <div class="flex-shrink-0 pt-0.5 text-slate-400">
+             <svg class="w-5 h-5 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-slate-700 text-sm" id="lblPendingNoteTitle">Live connection active</p>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1" id="lblPendingNoteBody">
+              This screen will update automatically as soon as the system synchronizes. No need to refresh.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATE 5: Order Details Loaded -->
+      <div id="stateLoaded" class="hidden space-y-6 animate-slide-up">
+
+        <!-- Header Card: Order Info & Status Stepper -->
+        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm">
+          
+          <!-- Top Row: ID, Date, Status Badge -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-100 pb-6 mb-8">
+            <div>
+              <h2 class="text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+                <span id="lblOrderPrefix" class="text-slate-400 font-semibold text-lg">Order</span> 
+                <span id="txtLoadedOrderId" class="font-mono text-brand-600"></span>
+              </h2>
+              <p class="text-sm text-slate-500 mt-1.5 font-medium flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <span id="txtOrderPlacedTime"></span>
+              </p>
+            </div>
+            <span id="txtCurrentStatusBadge" class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border">
+              Processing
+            </span>
+          </div>
+
+          <!-- Professional 4-Step Progress Stepper -->
+          <div class="relative pt-2 pb-2 w-full max-w-2xl mx-auto">
+            <div class="grid grid-cols-4 relative">
+              <!-- Background Track -->
+              <div class="absolute top-4 left-[12.5%] right-[12.5%] h-1 bg-slate-100 rounded-full -z-10"></div>
+              <!-- Active Progress Fill -->
+              <div class="absolute top-4 left-[12.5%] right-[12.5%] h-1 bg-brand-500 rounded-full -z-10 transition-all duration-700 ease-in-out" id="stepperProgressBar" style="width: 0%;"></div>
+
+              <!-- Steps -->
+              <div class="text-center flex flex-col items-center">
+                <div id="stepDot1" class="w-9 h-9 rounded-full flex items-center justify-center bg-slate-100 text-slate-400 border-4 border-white transition-all duration-500">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <span class="text-xs sm:text-sm font-semibold text-slate-400 mt-3 block" id="lblStep1">Placed</span>
+              </div>
+              <div class="text-center flex flex-col items-center">
+                <div id="stepDot2" class="w-9 h-9 rounded-full flex items-center justify-center bg-slate-100 text-slate-400 border-4 border-white transition-all duration-500">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </div>
+                <span class="text-xs sm:text-sm font-semibold text-slate-400 mt-3 block" id="lblStep2">Processing</span>
+              </div>
+              <div class="text-center flex flex-col items-center">
+                <div id="stepDot3" class="w-9 h-9 rounded-full flex items-center justify-center bg-slate-100 text-slate-400 border-4 border-white transition-all duration-500">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <span class="text-xs sm:text-sm font-semibold text-slate-400 mt-3 block" id="lblStep3">Paid</span>
+              </div>
+              <div class="text-center flex flex-col items-center">
+                <div id="stepDot4" class="w-9 h-9 rounded-full flex items-center justify-center bg-slate-100 text-slate-400 border-4 border-white transition-all duration-500">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                </div>
+                <span class="text-xs sm:text-sm font-semibold text-slate-400 mt-3 block" id="lblStep4">Delivered</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cancelled Alert -->
+          <div id="bannerCancelled" class="hidden mt-8 bg-red-50 border border-red-100 rounded-xl p-4 flex items-start space-x-3 text-red-700 text-sm">
+            <svg class="w-5 h-5 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <div>
+              <p class="font-semibold mb-0.5" id="lblCancelledTitle">Order Cancelled</p>
+              <p class="text-red-600/90" id="lblCancelledNotice">This order was marked as cancelled. Please contact the committee for further details.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layout Grid for Details & Total -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Column 1: Size Matrix -->
+          <div class="md:col-span-2 bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+            <div class="p-5 sm:p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+              <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider" id="lblItemBreakdown">Item Breakdown</h3>
+            </div>
+
+            <div class="p-5 sm:p-6 flex-grow overflow-x-auto no-scrollbar">
+              <table class="w-full text-left text-sm whitespace-nowrap">
+                <thead>
+                  <tr class="text-xs font-semibold text-slate-400 border-b border-slate-100">
+                    <th class="pb-3 px-1 uppercase" id="thSize">Size</th>
+                    <th class="pb-3 px-1 text-right uppercase" id="thQuantity">Quantity</th>
+                  </tr>
+                </thead>
+                <tbody id="tblSizeBreakdownRows" class="text-slate-700 divide-y divide-slate-50">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Column 2: Customer & Totals -->
+          <div class="space-y-6">
+            <!-- Customer Card -->
+            <div class="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm">
+              <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4" id="lblCustomerDetails">Customer Details</h3>
+              <p class="text-base font-semibold text-slate-800" id="txtCustomerName">Devotee</p>
+              <p class="text-sm text-slate-500 mt-1 font-mono tracking-wide" id="txtCustomerPhone">017****5678</p>
+            </div>
+
+            <!-- Total Card -->
+            <div class="bg-slate-900 p-5 sm:p-6 rounded-3xl shadow-sm text-white relative overflow-hidden">
+              <!-- Decorative subtle shape in background -->
+              <div class="absolute -right-10 -top-10 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
+              
+              <div class="space-y-3 mb-4 relative z-10">
+                <div class="flex justify-between text-sm text-slate-300">
+                  <span id="lblUnitPrice">Unit Price:</span>
+                  <span class="font-medium text-slate-100">৳<span id="txtUnitPrice">0</span></span>
+                </div>
+                <div class="flex justify-between text-sm text-slate-300">
+                  <span id="lblTotalQuantity">Total Items:</span>
+                  <span class="font-medium text-slate-100"><span id="txtTotalQuantity">0</span> pcs</span>
+                </div>
+              </div>
+              <div class="border-t border-slate-700/50 pt-4 flex justify-between items-end relative z-10">
+                <span class="text-xs font-medium text-slate-400 uppercase tracking-wider mb-1" id="lblGrandTotal">Total</span>
+                <span class="text-3xl font-bold tracking-tight text-white">৳<span id="txtGrandTotal">0</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optional Order Note -->
+        <div id="containerOrderNote" class="hidden bg-slate-50 border border-slate-200 rounded-2xl p-5 flex gap-3 text-sm text-slate-700">
+          <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <div>
+            <span class="font-bold text-slate-900 block mb-0.5" id="lblOrderNote">Note: </span>
+            <span id="txtOrderNote" class="leading-relaxed"></span>
+          </div>
+        </div>
+
+        <!-- Support Actions -->
+        <div class="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-5">
+          <div class="text-center md:text-left">
+            <h4 class="text-sm font-bold text-slate-900" id="lblNeedHelp">Have questions about this order?</h4>
+            <p class="text-xs text-slate-500 mt-1" id="lblContactDesc">Contact the committee directly.</p>
+          </div>
+          <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+            <a href="tel:+8801700000000" id="btnCallSupport" class="w-full sm:w-auto inline-flex items-center justify-center px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-semibold rounded-xl transition-all">
+              <svg class="w-4 h-4 mr-2 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+              <span id="lblCallSupport">Call Us</span>
+            </a>
+            <a href="https://wa.me/8801700000000" target="_blank" id="btnWhatsApp" class="w-full sm:w-auto inline-flex items-center justify-center px-5 py-2.5 bg-[#25D366] hover:bg-[#20b858] text-white text-sm font-semibold rounded-xl transition-all shadow-sm">
+              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-auto py-6 text-center text-xs text-slate-400 font-medium relative z-10">
+    <div class="max-w-4xl mx-auto px-5">
+      <p>&copy; <span id="currentYear"></span> <span id="footerBrand">Poddarpara Sarbajanin Durga Mandir</span>.</p>
+    </div>
+  </footer>
+
+  <!-- Firebase v10 Modular SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBkvOLHK-_RmpAR_6dlVYiMXXnKaNGcyS0",
+      authDomain: "ppdm-t-shirt-app.firebaseapp.com",
+      databaseURL: "https://ppdm-t-shirt-app-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "ppdm-t-shirt-app",
+      storageBucket: "ppdm-t-shirt-app.firebasestorage.app",
+      messagingSenderId: "529350540686",
+      appId: "1:529350540686:web:d7a8d56b02661f22495b54"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Checksum config
+    const CHARSET = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+    const W1 = [3, 7, 13, 19, 23];
+    const W2 = [29, 17, 11, 5, 2];
+
+    function validateOrderId(orderId) {
+      if (!orderId || typeof orderId !== 'string') return false;
+      const clean = orderId.trim().toUpperCase();
+      if (clean.length !== 7) return false;
+      for (let ch of clean) {
+        if (!CHARSET.includes(ch)) return false;
+      }
+      let sum1 = 0, sum2 = 0;
+      for (let i = 0; i < 5; i++) {
+        const val = CHARSET.indexOf(clean[i]);
+        sum1 += val * W1[i];
+        sum2 += val * W2[i];
+      }
+      const c1 = sum1 % 32;
+      const c2 = (sum2 + c1 * 31) % 32;
+      return clean[5] === CHARSET[c1] && clean[6] === CHARSET[c2];
+    }
+
+    // Bilingual Dictionary
+    const i18n = {
+      en: {
+        brand: "Poddarpara Sarbajanin Durga Mandir",
+        tracker: "T-Shirt Order Tracker",
+        searchPlaceholder: "Enter 7-char Order ID",
+        trackBtn: "Track Order",
+        emptyTitle: "Track Your Order",
+        emptyDesc: "Enter your 7-character order code above to check the live status of your items.",
+        verifying: "Retrieving order details...",
+        invalidTitle: "Order Not Found",
+        invalidDesc: "The tracking code provided is not recognized. Please check your SMS and ensure you entered the complete code.",
+        badgePending: "Order Received",
+        orderPrefix: "Order",
+        pendingMsg: "Your order was successfully recorded. Detailed item breakdown is currently syncing.",
+        pendingNoteTitle: "Live connection active",
+        pendingNoteBody: "This screen will update automatically as soon as the system synchronizes. No need to refresh.",
+        step1: "Placed",
+        step2: "Processing",
+        step3: "Paid",
+        step4: "Delivered",
+        cancelledTitle: "Order Cancelled",
+        cancelledNotice: "This order was marked as cancelled. Please contact the committee for further details.",
+        customerDetails: "Customer Details",
+        itemBreakdown: "Item Breakdown",
+        size: "Size",
+        quantity: "Quantity",
+        unitPrice: "Unit Price:",
+        totalQuantity: "Total Items:",
+        grandTotal: "Total",
+        note: "Note:",
+        needHelp: "Have questions about this order?",
+        contactDesc: "Contact the committee directly.",
+        callSupport: "Call Us",
+        statusProcessing: "Processing",
+        statusPaid: "Paid",
+        statusDelivered: "Delivered",
+        statusCancelled: "Cancelled"
+      },
+      bn: {
+        brand: "পোদ্দারপাড়া সর্বজনীন দুর্গা মন্দির",
+        tracker: "টি-শার্ট অর্ডার ট্র্যাকার",
+        searchPlaceholder: "৭ অক্ষরের কোড দিন",
+        trackBtn: "খুঁজুন",
+        emptyTitle: "অর্ডার ট্র্যাক করুন",
+        emptyDesc: "আপনার আইটেমগুলোর লাইভ স্ট্যাটাস দেখতে উপরে ৭ অক্ষরের কোড দিন।",
+        verifying: "তথ্য সংগ্রহ করা হচ্ছে...",
+        invalidTitle: "অর্ডার পাওয়া যায়নি",
+        invalidDesc: "প্রদত্ত ট্র্যাকিং কোডটি সঠিক নয়। অনুগ্রহ করে আপনার এসএমএস চেক করুন এবং সঠিক কোড দিন।",
+        badgePending: "অর্ডার গৃহীত",
+        orderPrefix: "অর্ডার",
+        pendingMsg: "আপনার অর্ডারটি সফলভাবে নথিভুক্ত হয়েছে। সাইজ ও পরিমাণের তথ্য সিঙ্ক হচ্ছে।",
+        pendingNoteTitle: "লাইভ কানেকশন চালু আছে",
+        pendingNoteBody: "সিস্টেম অনলাইনে আসার সাথে সাথে স্ক্রিনটি নিজে থেকেই আপডেট হবে। রিলোড করবেন না।",
+        step1: "গৃহীত",
+        step2: "প্রক্রিয়াধীন",
+        step3: "পরিশোধিত",
+        step4: "ডেলিভারি সম্পন্ন",
+        cancelledTitle: "অর্ডার বাতিল",
+        cancelledNotice: "এই অর্ডারটি বাতিল করা হয়েছে। বিস্তারিত জানার জন্য কমিটিতে যোগাযোগ করুন।",
+        customerDetails: "গ্রাহকের তথ্য",
+        itemBreakdown: "সাইজ ও পরিমাণের তালিকা",
+        size: "সাইজ",
+        quantity: "পরিমাণ",
+        unitPrice: "একক মূল্য:",
+        totalQuantity: "মোট টি-শার্ট:",
+        grandTotal: "সর্বমোট বিল",
+        note: "বিশেষ নোট:",
+        needHelp: "অর্ডার নিয়ে কোনো জিজ্ঞাসা আছে?",
+        contactDesc: "সরাসরি কমিটির সাথে যোগাযোগ করুন।",
+        callSupport: "কল করুন",
+        statusProcessing: "প্রক্রিয়াধীন",
+        statusPaid: "পরিশোধিত",
+        statusDelivered: "ডেলিভারি সম্পন্ন",
+        statusCancelled: "বাতিলকৃত"
+      }
+    };
+
+    let currentLang = (navigator.language && navigator.language.startsWith('bn')) ? 'bn' : 'bn'; // Defaulting to Bengali
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      const t = i18n[lang];
+      
+      document.title = "Order Tracking | " + t.brand;
+      document.getElementById('headerBrandTitle').innerText = t.brand;
+      document.getElementById('footerBrand').innerText = t.brand;
+      document.getElementById('headerSubtitle').innerText = t.tracker;
+      document.getElementById('orderSearchInput').placeholder = t.searchPlaceholder;
+      document.getElementById('btnTrackText').innerText = t.trackBtn;
+      document.getElementById('lblEmptyTitle').innerText = t.emptyTitle;
+      document.getElementById('lblEmptyDesc').innerText = t.emptyDesc;
+      document.getElementById('lblVerifying').innerText = t.verifying;
+      document.getElementById('lblInvalidTitle').innerText = t.invalidTitle;
+      document.getElementById('lblInvalidDesc').innerText = t.invalidDesc;
+      document.getElementById('badgePendingSync').innerText = t.badgePending;
+      document.getElementById('lblPendingOrderIdPrefix').innerText = t.orderPrefix;
+      document.getElementById('lblPendingSyncMessage').innerText = t.pendingMsg;
+      document.getElementById('lblPendingNoteTitle').innerText = t.pendingNoteTitle;
+      document.getElementById('lblPendingNoteBody').innerText = t.pendingNoteBody;
+      document.getElementById('lblOrderPrefix').innerText = t.orderPrefix;
+      document.getElementById('lblStep1').innerText = t.step1;
+      document.getElementById('lblStep2').innerText = t.step2;
+      document.getElementById('lblStep3').innerText = t.step3;
+      document.getElementById('lblStep4').innerText = t.step4;
+      document.getElementById('lblCancelledTitle').innerText = t.cancelledTitle;
+      document.getElementById('lblCancelledNotice').innerText = t.cancelledNotice;
+      document.getElementById('lblCustomerDetails').innerText = t.customerDetails;
+      document.getElementById('lblItemBreakdown').innerText = t.itemBreakdown;
+      document.getElementById('thSize').innerText = t.size;
+      document.getElementById('thQuantity').innerText = t.quantity;
+      document.getElementById('lblUnitPrice').innerText = t.unitPrice;
+      document.getElementById('lblTotalQuantity').innerText = t.totalQuantity;
+      document.getElementById('lblGrandTotal').innerText = t.grandTotal;
+      document.getElementById('lblOrderNote').innerText = t.note;
+      document.getElementById('lblNeedHelp').innerText = t.needHelp;
+      document.getElementById('lblContactDesc').innerText = t.contactDesc;
+      document.getElementById('lblCallSupport').innerText = t.callSupport;
+
+      if (lang === 'en') {
+        document.getElementById('langLabel').innerText = 'বাংলা';
+      } else {
+        document.getElementById('langLabel').innerText = 'English';
+      }
+    }
+
+    document.getElementById('langToggleBtn').addEventListener('click', () => {
+      setLanguage(currentLang === 'en' ? 'bn' : 'en');
+      if(loadedOrderData && currentOrderId) {
+        renderOrderDetails(loadedOrderData, currentOrderId);
+      }
+    });
+
+    document.getElementById('currentYear').innerText = new Date().getFullYear();
+
+    const stateEmpty = document.getElementById('stateEmpty');
+    const stateLoading = document.getElementById('stateLoading');
+    const stateInvalid = document.getElementById('stateInvalid');
+    const statePendingSync = document.getElementById('statePendingSync');
+    const stateLoaded = document.getElementById('stateLoaded');
+
+    function hideAllStates() {
+      stateEmpty.classList.add('hidden');
+      stateLoading.classList.add('hidden');
+      stateInvalid.classList.add('hidden');
+      statePendingSync.classList.add('hidden');
+      stateLoaded.classList.add('hidden');
+    }
+
+    let currentUnsubscribe = null;
+    let loadedOrderData = null;
+    let currentOrderId = null;
+
+    // Secret function for testing UI states silently without a database connection
+    function generateMockData(orderId) {
+      // Map CONFIRMED to PAID to reflect business logic accurately
+      const statuses = ['UNDER_PROCESSING', 'PAID', 'DELIVERED', 'CANCELLED'];
+      const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+      return {
+        orderId: orderId,
+        customerName: "Devotee Name",
+        mobileNumber: "01799999999",
+        unitPrice: 350,
+        qtyChild12: Math.floor(Math.random() * 2),
+        qtyS: Math.floor(Math.random() * 3),
+        qtyM: Math.floor(Math.random() * 4),
+        qtyL: Math.floor(Math.random() * 2),
+        qtyXL: 0,
+        qtyXXL: 0,
+        qtyXXXL: 0,
+        status: randomStatus,
+        createdAt: Date.now() - 86400000,
+        note: "Please deliver before the Puja starts."
+      };
+    }
+
+    function trackOrder(orderIdRaw) {
+      if (!orderIdRaw) return;
+      const orderId = orderIdRaw.trim().toUpperCase();
+      document.getElementById('orderSearchInput').value = orderId;
+      loadedOrderData = null;
+      currentOrderId = null;
+
+      hideAllStates();
+      stateLoading.classList.remove('hidden');
+
+      // Intercept the hidden DEMO test code
+      if (orderId === 'DEMO123') {
+        setTimeout(() => {
+          if (currentUnsubscribe) {
+            currentUnsubscribe();
+            currentUnsubscribe = null;
+          }
+          loadedOrderData = generateMockData(orderId);
+          currentOrderId = orderId;
+          renderOrderDetails(loadedOrderData, orderId);
+          
+          hideAllStates();
+          stateLoaded.classList.remove('hidden');
+        }, 600); // Simulate network latency
+        return;
+      }
+
+      if (!validateOrderId(orderId)) {
+        setTimeout(() => {
+          hideAllStates();
+          stateInvalid.classList.remove('hidden');
+        }, 500); 
+        return;
+      }
+
+      document.getElementById('txtPendingOrderId').innerText = orderId;
+      document.getElementById('txtLoadedOrderId').innerText = orderId;
+
+      if (currentUnsubscribe) {
+        currentUnsubscribe();
+        currentUnsubscribe = null;
+      }
+
+      const orderRef = ref(db, 'order/' + orderId);
+      currentUnsubscribe = onValue(orderRef, (snapshot) => {
+        if (!snapshot.exists()) {
+          hideAllStates();
+          statePendingSync.classList.remove('hidden');
+        } else {
+          loadedOrderData = snapshot.val();
+          currentOrderId = orderId;
+          renderOrderDetails(loadedOrderData, orderId);
+          hideAllStates();
+          stateLoaded.classList.remove('hidden');
+        }
+      }, (error) => {
+        console.error("Firebase listen error:", error);
+      });
+    }
+
+    function renderOrderDetails(order, orderId) {
+      const t = i18n[currentLang];
+
+      const timeMs = order.createdAt || order.updatedAt;
+      if (timeMs) {
+        const d = new Date(timeMs);
+        document.getElementById('txtOrderPlacedTime').innerText = d.toLocaleDateString() + ' • ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      }
+
+      const maskedPhone = order.mobileNumber ? order.mobileNumber.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2') : 'N/A';
+      document.getElementById('txtCustomerName').innerText = order.customerName || 'Customer';
+      document.getElementById('txtCustomerPhone').innerText = maskedPhone;
+
+      // Ensure CONFIRMED maps visually to PAID based on instructions
+      let rawStatus = (order.status || 'UNDER_PROCESSING').toUpperCase();
+      if (rawStatus === 'CONFIRMED') rawStatus = 'PAID';
+      const status = rawStatus;
+
+      const badge = document.getElementById('txtCurrentStatusBadge');
+      const bar = document.getElementById('stepperProgressBar');
+      const d1 = document.getElementById('stepDot1');
+      const d2 = document.getElementById('stepDot2');
+      const d3 = document.getElementById('stepDot3');
+      const d4 = document.getElementById('stepDot4');
+      const l1 = document.getElementById('lblStep1');
+      const l2 = document.getElementById('lblStep2');
+      const l3 = document.getElementById('lblStep3');
+      const l4 = document.getElementById('lblStep4');
+      const bannerCancelled = document.getElementById('bannerCancelled');
+
+      // UI Reset State
+      const inactiveDot = "w-9 h-9 rounded-full flex items-center justify-center bg-slate-100 text-slate-400 border-4 border-white transition-all duration-500";
+      const inactiveLabel = "text-xs sm:text-sm font-semibold text-slate-400 mt-3 block transition-colors";
+      
+      [d1, d2, d3, d4].forEach(d => d.className = inactiveDot);
+      [l1, l2, l3, l4].forEach(l => l.className = inactiveLabel);
+      bannerCancelled.classList.add('hidden');
+
+      // Active / Past Styles
+      const activeDot = "w-9 h-9 rounded-full flex items-center justify-center bg-brand-500 text-white border-4 border-white ring-4 ring-brand-50 shadow-sm transition-all duration-500 z-10";
+      const pastDot = "w-9 h-9 rounded-full flex items-center justify-center bg-brand-600 text-white border-4 border-white transition-all duration-500 z-10";
+      const activeLabel = "text-xs sm:text-sm font-bold text-brand-600 mt-3 block transition-colors";
+      const pastLabel = "text-xs sm:text-sm font-semibold text-brand-700 mt-3 block transition-colors";
+
+      if (status === 'CANCELLED') {
+        badge.innerText = t.statusCancelled;
+        badge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-red-50 text-red-700 border border-red-200";
+        bannerCancelled.classList.remove('hidden');
+        bar.style.width = '0%';
+        d1.className = pastDot; l1.className = pastLabel;
+      } else if (status === 'DELIVERED') {
+        badge.innerText = t.statusDelivered;
+        badge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-emerald-50 text-emerald-700 border border-emerald-200";
+        bar.style.width = '100%';
+        d1.className = pastDot; l1.className = pastLabel;
+        d2.className = pastDot; l2.className = pastLabel;
+        d3.className = pastDot; l3.className = pastLabel;
+        d4.className = "w-9 h-9 rounded-full flex items-center justify-center bg-emerald-500 text-white border-4 border-white ring-4 ring-emerald-50 shadow-sm transition-all duration-500 z-10"; 
+        l4.className = "text-xs sm:text-sm font-bold text-emerald-600 mt-3 block transition-colors";
+      } else if (status === 'PAID') {
+        badge.innerText = t.statusPaid;
+        badge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-brand-50 text-brand-700 border border-brand-200";
+        bar.style.width = '66%';
+        d1.className = pastDot; l1.className = pastLabel;
+        d2.className = pastDot; l2.className = pastLabel;
+        d3.className = activeDot; l3.className = activeLabel;
+      } else {
+        // UNDER_PROCESSING
+        badge.innerText = t.statusProcessing;
+        badge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-blue-50 text-blue-700 border border-blue-200";
+        bar.style.width = '33%';
+        d1.className = pastDot; l1.className = pastLabel;
+        d2.className = activeDot; l2.className = activeLabel;
+      }
+
+      // Populate Data Matrix
+      const sizeList = [
+        { label: "Child (1-2y)", qty: order.qtyChild12 || 0 },
+        { label: "Small (S)", qty: order.qtyS || 0 },
+        { label: "Medium (M)", qty: order.qtyM || 0 },
+        { label: "Large (L)", qty: order.qtyL || 0 },
+        { label: "Extra Large (XL)", qty: order.qtyXL || 0 },
+        { label: "Double XL (2XL)", qty: order.qtyXXL || 0 },
+        { label: "Triple XL (3XL)", qty: order.qtyXXXL || 0 }
+      ];
+
+      const tbody = document.getElementById('tblSizeBreakdownRows');
+      tbody.innerHTML = '';
+      let totalQty = 0;
+
+      sizeList.forEach(item => {
+        if (item.qty > 0) {
+          totalQty += item.qty;
+          const tr = document.createElement('tr');
+          tr.className = "hover:bg-slate-50 transition-colors";
+          tr.innerHTML = `
+            <td class="py-3 px-2 font-medium text-slate-700 flex items-center space-x-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+              <span>${item.label}</span>
+            </td>
+            <td class="py-3 px-2 text-right font-bold text-slate-900">${item.qty} <span class="text-slate-400 text-xs font-normal ml-1">pcs</span></td>
+          `;
+          tbody.appendChild(tr);
+        }
+      });
+
+      const unitPrice = order.unitPrice || 0;
+      const grandTotal = totalQty * unitPrice;
+
+      const fmt = (num) => currentLang === 'bn' ? num.toLocaleString('bn-BD') : num.toLocaleString('en-US');
+
+      document.getElementById('txtUnitPrice').innerText = fmt(unitPrice);
+      document.getElementById('txtTotalQuantity').innerText = fmt(totalQty);
+      document.getElementById('txtGrandTotal').innerText = fmt(grandTotal);
+
+      const containerNote = document.getElementById('containerOrderNote');
+      if (order.note && order.note.trim()) {
+        document.getElementById('txtOrderNote').innerText = order.note.trim();
+        containerNote.classList.remove('hidden');
+      } else {
+        containerNote.classList.add('hidden');
+      }
+    }
+
+    function getOrderIdFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const queryId = params.get('id') || params.get('order');
+      if (queryId) return queryId;
+
+      const pathSegments = window.location.pathname.split('/').filter(Boolean);
+      if (pathSegments.length > 0) {
+        const last = pathSegments[pathSegments.length - 1];
+        if (last && last.length === 7) return last;
+      }
+      return null;
+    }
+
+    document.getElementById('btnTrackOrder').addEventListener('click', () => {
+      const val = document.getElementById('orderSearchInput').value;
+      if (val) trackOrder(val);
+    });
+
+    document.getElementById('orderSearchInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const val = document.getElementById('orderSearchInput').value;
+        if (val) trackOrder(val);
+      }
+    });
+
+    setLanguage(currentLang);
+    const initialId = getOrderIdFromUrl();
+    if (initialId) {
+      trackOrder(initialId);
+    }
+  </script>
+</body>
+</html>
