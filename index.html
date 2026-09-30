@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ea580c" />
   <title>Order Tracking | পোদ্দারপাড়া সর্বজনীন দুর্গা মন্দির</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
@@ -41,6 +42,8 @@
               100: '#fce9d3',
               500: '#f97316',
               600: '#ea580c',
+              700: '#c2410c',
+              200: '#fbd5a5',
               900: '#7c2d12',
             }
           }
@@ -187,6 +190,7 @@
               <p class="text-sm text-slate-500 mt-1.5 font-medium flex items-center gap-1.5">
                 <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                 <span id="txtOrderPlacedTime"></span>
+                <button id="btnCopyLink" type="button" class="ml-2 px-2.5 py-1 rounded-lg border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50 hover:text-brand-600 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500/30"><span id="lblCopyLink">Copy link</span></button>
               </p>
             </div>
             <span id="txtCurrentStatusBadge" class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border">
@@ -285,7 +289,7 @@
                 </div>
                 <div class="flex justify-between text-sm text-slate-300">
                   <span id="lblTotalQuantity">Total Items:</span>
-                  <span class="font-medium text-slate-100"><span id="txtTotalQuantity">0</span> pcs</span>
+                  <span class="font-medium text-slate-100"><span id="txtTotalQuantity">0</span> <span class="pcsLbl">pcs</span></span>
                 </div>
               </div>
               <div class="border-t border-slate-700/50 pt-4 flex justify-between items-end relative z-10">
@@ -312,11 +316,11 @@
             <p class="text-xs text-slate-500 mt-1" id="lblContactDesc">Contact the committee directly.</p>
           </div>
           <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
-            <a href="tel:+8801700000000" id="btnCallSupport" class="w-full sm:w-auto inline-flex items-center justify-center px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-semibold rounded-xl transition-all">
+            <a href="tel:+8801312306760" id="btnCallSupport" class="w-full sm:w-auto inline-flex items-center justify-center px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-semibold rounded-xl transition-all">
               <svg class="w-4 h-4 mr-2 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
               <span id="lblCallSupport">Call Us</span>
             </a>
-            <a href="https://wa.me/8801700000000" target="_blank" id="btnWhatsApp" class="w-full sm:w-auto inline-flex items-center justify-center px-5 py-2.5 bg-[#25D366] hover:bg-[#20b858] text-white text-sm font-semibold rounded-xl transition-all shadow-sm">
+            <a href="https://wa.me/8801312306760" target="_blank" id="btnWhatsApp" class="w-full sm:w-auto inline-flex items-center justify-center px-5 py-2.5 bg-[#25D366] hover:bg-[#20b858] text-white text-sm font-semibold rounded-xl transition-all shadow-sm">
               <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
               <span>WhatsApp</span>
             </a>
@@ -332,6 +336,7 @@
   <footer class="mt-auto py-6 text-center text-xs text-slate-400 font-medium relative z-10">
     <div class="max-w-4xl mx-auto px-5">
       <p>&copy; <span id="currentYear"></span> <span id="footerBrand">Poddarpara Sarbajanin Durga Mandir</span>.</p>
+      <p class="mt-1.5"><a href="tel:+8801312306760" class="hover:text-brand-600 underline underline-offset-2">01312306760</a> &nbsp;|&nbsp; <a href="https://wa.me/8801312306760" target="_blank" rel="noopener" class="hover:text-brand-600 underline underline-offset-2">WhatsApp</a></p>
     </div>
   </footer>
 
@@ -352,6 +357,7 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
+    const SUPPORT_INTL = "8801312306760"; // 01312306760
 
     // Checksum config
     const CHARSET = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
@@ -408,12 +414,15 @@
         grandTotal: "Total",
         note: "Note:",
         needHelp: "Have questions about this order?",
-        contactDesc: "Contact the committee directly.",
+        contactDesc: "Call or WhatsApp the committee: 01312306760",
         callSupport: "Call Us",
         statusProcessing: "Processing",
         statusPaid: "Paid",
         statusDelivered: "Delivered",
-        statusCancelled: "Cancelled"
+        statusCancelled: "Cancelled",
+        pcs: "pcs", copyLink: "Copy link", copied: "Link copied",
+        errTitle: "Connection problem", errDesc: "We could not reach the order database. Check your internet and try again.",
+        waMsg: "Hello, I have a question about my T-shirt order:"
       },
       bn: {
         brand: "পোদ্দারপাড়া সর্বজনীন দুর্গা মন্দির",
@@ -445,16 +454,20 @@
         grandTotal: "সর্বমোট বিল",
         note: "বিশেষ নোট:",
         needHelp: "অর্ডার নিয়ে কোনো জিজ্ঞাসা আছে?",
-        contactDesc: "সরাসরি কমিটির সাথে যোগাযোগ করুন।",
+        contactDesc: "কল বা হোয়াটসঅ্যাপ করুন: 01312306760",
         callSupport: "কল করুন",
         statusProcessing: "প্রক্রিয়াধীন",
         statusPaid: "পরিশোধিত",
         statusDelivered: "ডেলিভারি সম্পন্ন",
-        statusCancelled: "বাতিলকৃত"
+        statusCancelled: "বাতিলকৃত",
+        pcs: "টি", copyLink: "লিংক কপি", copied: "লিংক কপি হয়েছে",
+        errTitle: "সংযোগে সমস্যা", errDesc: "অর্ডারের তথ্য আনা যায়নি। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।",
+        waMsg: "নমস্কার, আমার টি-শার্ট অর্ডার সম্পর্কে জানতে চাই। অর্ডার আইডি:"
       }
     };
 
-    let currentLang = (navigator.language && navigator.language.startsWith('bn')) ? 'bn' : 'bn'; // Defaulting to Bengali
+    let currentLang = 'bn';
+    try { if (localStorage.getItem('lang') === 'en') currentLang = 'en'; } catch (e) {}
 
     function setLanguage(lang) {
       currentLang = lang;
@@ -494,6 +507,10 @@
       document.getElementById('lblNeedHelp').innerText = t.needHelp;
       document.getElementById('lblContactDesc').innerText = t.contactDesc;
       document.getElementById('lblCallSupport').innerText = t.callSupport;
+      document.querySelectorAll('.pcsLbl').forEach(e => e.innerText = t.pcs);
+      document.getElementById('lblCopyLink').innerText = t.copyLink;
+      document.documentElement.lang = lang;
+      try { localStorage.setItem('lang', lang); } catch (e) {}
 
       if (lang === 'en') {
         document.getElementById('langLabel').innerText = 'বাংলা';
@@ -537,15 +554,9 @@
       return {
         orderId: orderId,
         customerName: "Devotee Name",
-        mobileNumber: "01799999999",
+        customerPhone: "01799999999",
         unitPrice: 350,
-        qtyChild12: Math.floor(Math.random() * 2),
-        qtyS: Math.floor(Math.random() * 3),
-        qtyM: Math.floor(Math.random() * 4),
-        qtyL: Math.floor(Math.random() * 2),
-        qtyXL: 0,
-        qtyXXL: 0,
-        qtyXXXL: 0,
+        sizes: { child12: Math.floor(Math.random() * 2), S: Math.floor(Math.random() * 3), M: Math.floor(Math.random() * 4), L: Math.floor(Math.random() * 2), XL: 0, XXL: 0, XXXL: 0 },
         status: randomStatus,
         createdAt: Date.now() - 86400000,
         note: "Please deliver before the Puja starts."
@@ -580,6 +591,7 @@
       }
 
       if (!validateOrderId(orderId)) {
+        setLanguage(currentLang);
         setTimeout(() => {
           hideAllStates();
           stateInvalid.classList.remove('hidden');
@@ -595,7 +607,7 @@
         currentUnsubscribe = null;
       }
 
-      const orderRef = ref(db, 'order/' + orderId);
+      const orderRef = ref(db, 'orders/' + orderId);
       currentUnsubscribe = onValue(orderRef, (snapshot) => {
         if (!snapshot.exists()) {
           hideAllStates();
@@ -609,19 +621,27 @@
         }
       }, (error) => {
         console.error("Firebase listen error:", error);
+        const te = i18n[currentLang];
+        document.getElementById('lblInvalidTitle').innerText = te.errTitle;
+        document.getElementById('lblInvalidDesc').innerText = te.errDesc;
+        hideAllStates();
+        stateInvalid.classList.remove('hidden');
       });
     }
 
     function renderOrderDetails(order, orderId) {
       const t = i18n[currentLang];
 
+      document.getElementById('btnWhatsApp').href = `https://wa.me/${SUPPORT_INTL}?text=` + encodeURIComponent(t.waMsg + ' ' + orderId);
+
       const timeMs = order.createdAt || order.updatedAt;
       if (timeMs) {
         const d = new Date(timeMs);
-        document.getElementById('txtOrderPlacedTime').innerText = d.toLocaleDateString() + ' • ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        document.getElementById('txtOrderPlacedTime').innerText = d.toLocaleDateString(currentLang === 'bn' ? 'bn-BD' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) + ' • ' + d.toLocaleTimeString(currentLang === 'bn' ? 'bn-BD' : 'en-GB', { hour: '2-digit', minute: '2-digit' });
       }
 
-      const maskedPhone = order.mobileNumber ? order.mobileNumber.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2') : 'N/A';
+      const rawPhone = order.customerPhone || order.mobileNumber || '';
+      const maskedPhone = rawPhone ? rawPhone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2') : 'N/A';
       document.getElementById('txtCustomerName').innerText = order.customerName || 'Customer';
       document.getElementById('txtCustomerPhone').innerText = maskedPhone;
 
@@ -688,14 +708,20 @@
       }
 
       // Populate Data Matrix
+      const sz = order.sizes || {};
+      const qn = (k, legacy) => Number(sz[k] ?? order[legacy] ?? 0) || 0; // nested sizes first, old flat fields as fallback
+      const fmtN = (n) => currentLang === 'bn' ? n.toLocaleString('bn-BD') : n.toLocaleString('en-US');
+      const L = currentLang === 'bn'
+        ? ['শিশু (১-২ বছর)', 'ছোট (S)', 'মাঝারি (M)', 'বড় (L)', 'অতিরিক্ত বড় (XL)', 'ডাবল এক্সএল (2XL)', 'ট্রিপল এক্সএল (3XL)']
+        : ['Child (1-2y)', 'Small (S)', 'Medium (M)', 'Large (L)', 'Extra Large (XL)', 'Double XL (2XL)', 'Triple XL (3XL)'];
       const sizeList = [
-        { label: "Child (1-2y)", qty: order.qtyChild12 || 0 },
-        { label: "Small (S)", qty: order.qtyS || 0 },
-        { label: "Medium (M)", qty: order.qtyM || 0 },
-        { label: "Large (L)", qty: order.qtyL || 0 },
-        { label: "Extra Large (XL)", qty: order.qtyXL || 0 },
-        { label: "Double XL (2XL)", qty: order.qtyXXL || 0 },
-        { label: "Triple XL (3XL)", qty: order.qtyXXXL || 0 }
+        { label: L[0], qty: qn('child12', 'qtyChild12') },
+        { label: L[1], qty: qn('S', 'qtyS') },
+        { label: L[2], qty: qn('M', 'qtyM') },
+        { label: L[3], qty: qn('L', 'qtyL') },
+        { label: L[4], qty: qn('XL', 'qtyXL') },
+        { label: L[5], qty: qn('XXL', 'qtyXXL') },
+        { label: L[6], qty: qn('XXXL', 'qtyXXXL') }
       ];
 
       const tbody = document.getElementById('tblSizeBreakdownRows');
@@ -712,7 +738,7 @@
               <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
               <span>${item.label}</span>
             </td>
-            <td class="py-3 px-2 text-right font-bold text-slate-900">${item.qty} <span class="text-slate-400 text-xs font-normal ml-1">pcs</span></td>
+            <td class="py-3 px-2 text-right font-bold text-slate-900">${fmtN(item.qty)} <span class="text-slate-400 text-xs font-normal ml-1">${t.pcs}</span></td>
           `;
           tbody.appendChild(tr);
         }
@@ -728,8 +754,9 @@
       document.getElementById('txtGrandTotal').innerText = fmt(grandTotal);
 
       const containerNote = document.getElementById('containerOrderNote');
-      if (order.note && order.note.trim()) {
-        document.getElementById('txtOrderNote').innerText = order.note.trim();
+      const noteText = String(order.notes || order.note || '').trim();
+      if (noteText) {
+        document.getElementById('txtOrderNote').innerText = noteText;
         containerNote.classList.remove('hidden');
       } else {
         containerNote.classList.add('hidden');
@@ -762,6 +789,15 @@
     });
 
     setLanguage(currentLang);
+    document.getElementById('btnCopyLink').addEventListener('click', async () => {
+      if (!currentOrderId) return;
+      const url = location.origin + location.pathname + '?id=' + currentOrderId;
+      const lbl = document.getElementById('lblCopyLink');
+      try { await navigator.clipboard.writeText(url); lbl.innerText = i18n[currentLang].copied; }
+      catch (e) { window.prompt('Link:', url); }
+      setTimeout(() => { lbl.innerText = i18n[currentLang].copyLink; }, 1800);
+    });
+
     const initialId = getOrderIdFromUrl();
     if (initialId) {
       trackOrder(initialId);
