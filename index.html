@@ -554,9 +554,9 @@
       return {
         orderId: orderId,
         customerName: "Devotee Name",
-        customerPhone: "01799999999",
+        mobileNumber: "+8801799999999",
         unitPrice: 350,
-        sizes: { child12: Math.floor(Math.random() * 2), S: Math.floor(Math.random() * 3), M: Math.floor(Math.random() * 4), L: Math.floor(Math.random() * 2), XL: 0, XXL: 0, XXXL: 0 },
+        sizes: { qtyChild12: Math.floor(Math.random() * 2), qtyS: Math.floor(Math.random() * 3), qtyM: Math.floor(Math.random() * 4), qtyL: Math.floor(Math.random() * 2), qtyXL: 1, qtyXXL: 0, qtyXXXL: 0 },
         status: randomStatus,
         createdAt: Date.now() - 86400000,
         note: "Please deliver before the Puja starts."
@@ -641,7 +641,7 @@
       }
 
       const rawPhone = order.customerPhone || order.mobileNumber || '';
-      const maskedPhone = rawPhone ? rawPhone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2') : 'N/A';
+      const maskedPhone = rawPhone ? rawPhone.replace(/\d(?=\d{4})/g, (m, i, str) => (i >= str.length - 8 ? '*' : m)) : 'N/A';
       document.getElementById('txtCustomerName').innerText = order.customerName || 'Customer';
       document.getElementById('txtCustomerPhone').innerText = maskedPhone;
 
@@ -709,19 +709,19 @@
 
       // Populate Data Matrix
       const sz = order.sizes || {};
-      const qn = (k, legacy) => Number(sz[k] ?? order[legacy] ?? 0) || 0; // nested sizes first, old flat fields as fallback
+      const qn = (k) => Number(sz[k] ?? order[k] ?? 0) || 0; // real structure: sizes.qtyS etc. (old flat fields still work)
       const fmtN = (n) => currentLang === 'bn' ? n.toLocaleString('bn-BD') : n.toLocaleString('en-US');
       const L = currentLang === 'bn'
         ? ['শিশু (১-২ বছর)', 'ছোট (S)', 'মাঝারি (M)', 'বড় (L)', 'অতিরিক্ত বড় (XL)', 'ডাবল এক্সএল (2XL)', 'ট্রিপল এক্সএল (3XL)']
         : ['Child (1-2y)', 'Small (S)', 'Medium (M)', 'Large (L)', 'Extra Large (XL)', 'Double XL (2XL)', 'Triple XL (3XL)'];
       const sizeList = [
-        { label: L[0], qty: qn('child12', 'qtyChild12') },
-        { label: L[1], qty: qn('S', 'qtyS') },
-        { label: L[2], qty: qn('M', 'qtyM') },
-        { label: L[3], qty: qn('L', 'qtyL') },
-        { label: L[4], qty: qn('XL', 'qtyXL') },
-        { label: L[5], qty: qn('XXL', 'qtyXXL') },
-        { label: L[6], qty: qn('XXXL', 'qtyXXXL') }
+        { label: L[0], qty: qn('qtyChild12') },
+        { label: L[1], qty: qn('qtyS') },
+        { label: L[2], qty: qn('qtyM') },
+        { label: L[3], qty: qn('qtyL') },
+        { label: L[4], qty: qn('qtyXL') },
+        { label: L[5], qty: qn('qtyXXL') },
+        { label: L[6], qty: qn('qtyXXXL') }
       ];
 
       const tbody = document.getElementById('tblSizeBreakdownRows');
@@ -744,13 +744,16 @@
         }
       });
 
-      const unitPrice = order.unitPrice || 0;
-      const grandTotal = totalQty * unitPrice;
+      const unitPrice = Number(order.unitPrice) || 0;
+      const storedQty = Number(order.totalQuantity);
+      const storedAmount = Number(order.totalAmount);
+      const shownQty = totalQty > 0 ? totalQty : (storedQty || 0);
+      const grandTotal = storedAmount > 0 ? storedAmount : shownQty * unitPrice;
 
       const fmt = (num) => currentLang === 'bn' ? num.toLocaleString('bn-BD') : num.toLocaleString('en-US');
 
       document.getElementById('txtUnitPrice').innerText = fmt(unitPrice);
-      document.getElementById('txtTotalQuantity').innerText = fmt(totalQty);
+      document.getElementById('txtTotalQuantity').innerText = fmt(shownQty);
       document.getElementById('txtGrandTotal').innerText = fmt(grandTotal);
 
       const containerNote = document.getElementById('containerOrderNote');
