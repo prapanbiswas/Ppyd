@@ -336,6 +336,7 @@
   <footer class="mt-auto py-6 text-center text-xs text-slate-400 font-medium relative z-10">
     <div class="max-w-4xl mx-auto px-5">
       <p>&copy; <span id="currentYear"></span> <span id="footerBrand">Poddarpara Sarbajanin Durga Mandir</span>.</p>
+      <p class="mt-1 text-[10px] text-slate-300">v3</p>
       <p class="mt-1.5"><a href="tel:+8801312306760" class="hover:text-brand-600 underline underline-offset-2">01312306760</a> &nbsp;|&nbsp; <a href="https://wa.me/8801312306760" target="_blank" rel="noopener" class="hover:text-brand-600 underline underline-offset-2">WhatsApp</a></p>
     </div>
   </footer>
@@ -708,21 +709,37 @@
       }
 
       // Populate Data Matrix
-      const sz = order.sizes || {};
-      const qn = (k) => Number(sz[k] ?? order[k] ?? 0) || 0; // real structure: sizes.qtyS etc. (old flat fields still work)
       const fmtN = (n) => currentLang === 'bn' ? n.toLocaleString('bn-BD') : n.toLocaleString('en-US');
-      const L = currentLang === 'bn'
-        ? ['শিশু (১-২ বছর)', 'ছোট (S)', 'মাঝারি (M)', 'বড় (L)', 'অতিরিক্ত বড় (XL)', 'ডাবল এক্সএল (2XL)', 'ট্রিপল এক্সএল (3XL)']
-        : ['Child (1-2y)', 'Small (S)', 'Medium (M)', 'Large (L)', 'Extra Large (XL)', 'Double XL (2XL)', 'Triple XL (3XL)'];
-      const sizeList = [
-        { label: L[0], qty: qn('qtyChild12') },
-        { label: L[1], qty: qn('qtyS') },
-        { label: L[2], qty: qn('qtyM') },
-        { label: L[3], qty: qn('qtyL') },
-        { label: L[4], qty: qn('qtyXL') },
-        { label: L[5], qty: qn('qtyXXL') },
-        { label: L[6], qty: qn('qtyXXXL') }
-      ];
+      const SIZE_ORDER = ['child12', 's', 'm', 'l', 'xl', 'xxl', 'xxxl'];
+      const SIZE_LABELS = currentLang === 'bn'
+        ? { child12: 'শিশু (১-২ বছর)', s: 'ছোট (S)', m: 'মাঝারি (M)', l: 'বড় (L)', xl: 'অতিরিক্ত বড় (XL)', xxl: 'ডাবল এক্সএল (2XL)', xxxl: 'ট্রিপল এক্সএল (3XL)' }
+        : { child12: 'Child (1-2y)', s: 'Small (S)', m: 'Medium (M)', l: 'Large (L)', xl: 'Extra Large (XL)', xxl: 'Double XL (2XL)', xxxl: 'Triple XL (3XL)' };
+      // "qtyXL", "XL", "xl" all become "xl"; "2XL" -> "xxl"; "3XL" -> "xxxl"
+      const normKey = (k) => {
+        let n = String(k).replace(/^qty/i, '').replace(/[^a-z0-9]/gi, '').toLowerCase();
+        if (n === '2xl') n = 'xxl';
+        if (n === '3xl') n = 'xxxl';
+        if (n === 'child' || n === 'child1' || n === 'child2') n = 'child12';
+        return n;
+      };
+      const found = {};
+      const addSizes = (obj) => {
+        if (!obj || typeof obj !== 'object') return;
+        Object.keys(obj).forEach(k => {
+          const v = Number(obj[k]);
+          if (!isNaN(v) && v > 0 && (SIZE_ORDER.includes(normKey(k)) || /^qty/i.test(k) || obj === order.sizes)) {
+            const nk = normKey(k);
+            found[nk] = (found[nk] || 0) + v;
+          }
+        });
+      };
+      if (order.sizes && typeof order.sizes === 'object') addSizes(order.sizes); // main structure: orders/<id>/sizes
+      else addSizes(order);                                                      // old flat records
+      const keys = Object.keys(found).sort((a, b) => {
+        const ia = SIZE_ORDER.indexOf(a), ib = SIZE_ORDER.indexOf(b);
+        return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+      });
+      const sizeList = keys.map(k => ({ label: SIZE_LABELS[k] || k.toUpperCase(), qty: found[k] }));
 
       const tbody = document.getElementById('tblSizeBreakdownRows');
       tbody.innerHTML = '';
